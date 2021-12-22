@@ -1,6 +1,7 @@
 require('../models/database');
 const Category = require('../models/Category');
 const Recipe = require('../models/Recipe');
+const { search } = require('../routes/recipeRoutes');
 
 /**
  * GET /
@@ -75,8 +76,19 @@ exports.homepage = async(req, res) => {
     }
 }
 
-
-
+/**
+ * POST /search
+ * Recipe
+ */
+exports.searchRecipe = async(req, res) => {
+    try {
+        let searchTerm = req.body.searchTerm;
+        let recipe = await Recipe.find( { $text: { $search: searchTerm, $diacriticSensitive: true } });
+        res.render('search', { title: 'Cooking Blog - Search', recipe } );
+    } catch (error) {
+        res.status(500).send({message: error.message || "Error Occured"});
+    }
+}
 
 
 
