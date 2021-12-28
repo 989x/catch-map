@@ -129,6 +129,45 @@ exports.searchRecipe = async(req, res) => {
     }
 }
 
+/**
+ * GET /submit-recipe
+ * Submit Recipe
+ */
+ exports.submitRecipe = async(req, res) => {
+    const infoErrorsObj = req.flash('infoErrors');
+    const infoSubmitObj = req.flash('infoSubmit');
+
+    res.render('submit-recipe', { title: 'Cooking Blog - Submit Recipe', infoErrorsObj, infoSubmitObj } );
+
+ }
+
+ /**
+ * POST /submit-recipe
+ * Submit Recipe
+ */
+exports.submitRecipeOnPost = async(req, res) => {
+    try {
+
+        const newRecipe = new Recipe({
+            name: 'New Chocolate Cake',
+            description: 'Chocalate Cake Description...',
+            email: 'hello@raddy.co.uk',
+            ingredients: 'Water',
+            category: 'Mexican',
+            image: 'chinese-steak-tofu-stew.jpg',
+        });
+
+        await newRecipe.save();
+        
+        req.flash('infoSubmit', 'Recipe has been added.')
+        res.redirect('/submit-recipe');
+    } catch (error) {
+        req.flash('infoErrors', error);
+        res.redirect('/submit-recipe');
+    }
+}
+
+
 
 
 

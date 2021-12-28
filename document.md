@@ -24,3 +24,8 @@ Overview : Home / Library
 
 https://cloud.mongodb.com/
 Connect to Cluster0 : myFirstDatabase > Recipes
+
+### script
+
+https://getbootstrap.com/docs/5.1/components/alerts/
+Alerts
