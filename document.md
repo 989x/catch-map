@@ -29,3 +29,6 @@ Connect to Cluster0 : myFirstDatabase > Recipes
 
 https://getbootstrap.com/docs/5.1/components/alerts/
 Alerts
+
+https://getbootstrap.com/docs/5.1/forms/validation/
+Browser defaults / required

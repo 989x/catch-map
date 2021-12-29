@@ -148,13 +148,32 @@ exports.searchRecipe = async(req, res) => {
 exports.submitRecipeOnPost = async(req, res) => {
     try {
 
+        let imageUploadFile;
+        let uploadPath;
+        let newImageName;
+
+        if(!req.files || Object.keys(req.files).length === 0){
+            console.log('No Files where uploaded.');
+        } else {
+
+            imageUploadFile = req.files.image;
+            newImageName = Date.now() + imageUploadFile.name;
+
+            uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
+
+            imageUploadFile.mv(uploadPath, function(err){
+                if(err) return res.status(500).send(err);
+            })
+        }
+
         const newRecipe = new Recipe({
-            name: 'New Chocolate Cake',
-            description: 'Chocalate Cake Description...',
-            email: 'hello@raddy.co.uk',
-            ingredients: 'Water',
-            category: 'Mexican',
-            image: 'chinese-steak-tofu-stew.jpg',
+
+            name: req.body.name,
+            description: req.body.description,
+            email: req.body.email,
+            ingredients: req.body.ingredients,
+            category: req.body.category,
+            image: newImageName
         });
 
         await newRecipe.save();
@@ -162,6 +181,7 @@ exports.submitRecipeOnPost = async(req, res) => {
         req.flash('infoSubmit', 'Recipe has been added.')
         res.redirect('/submit-recipe');
     } catch (error) {
+        // res.json(error);
         req.flash('infoErrors', error);
         res.redirect('/submit-recipe');
     }

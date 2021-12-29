@@ -16,7 +16,7 @@
 
     <% if(infoErrorsObj != '') { %> 
         <div class="col-8 alert alert-danger" role="alert">
-            <%= infoSubmitObj %> 
+            <%= infoErrorsObj[0].message %> 
         </div>
     <% } %> 
     <!-- end message -->
@@ -34,7 +34,7 @@
 
                 <div class="col-12">
                     <label for="name" class="form-label">Recipe Name</label>
-                    <input type="text" name="name" id="name" class="form-control">
+                    <input type="text" name="name" id="name" class="form-control" required>
                 </div>
 
                 <div class="col-12">
