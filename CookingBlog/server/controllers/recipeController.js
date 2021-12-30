@@ -8,16 +8,13 @@ const { search } = require('../routes/recipeRoutes');
  * Homepage
  */
 exports.homepage = async(req, res) => {
-
     try {
-
         const limitNumber = 5;
         const categories = await Category.find({}).limit(limitNumber);
         const latest = await Recipe.find({}).sort({_id: -1}).limit(limitNumber);
         const thai = await Recipe.find({ 'category': 'Thai' }).limit(limitNumber);
         const american = await Recipe.find({ 'category': 'American' }).limit(limitNumber);
         const chinese = await Recipe.find({ 'category': 'Chinese' }).limit(limitNumber);
-
         const food = { latest, thai, american, chinese }; 
 
         res.render('index', {title: 'Cooking Blog - Home' , categories , food } );
@@ -31,9 +28,7 @@ exports.homepage = async(req, res) => {
  * Categories
  */
  exports.exploreCategories = async(req, res) => {
-
     try {
-
         const limitNumber = 20;
         const categories = await Category.find({}).limit(limitNumber);
 
@@ -48,9 +43,7 @@ exports.homepage = async(req, res) => {
  * Categories By Id
  */
  exports.exploreCategoriesById = async(req, res) => {
-
     try {
-
         let categoryId = req.params.id;
         const limitNumber = 20;
         const categoryById = await Recipe.find({ 'category': categoryId }).limit(limitNumber);
@@ -66,9 +59,7 @@ exports.homepage = async(req, res) => {
  * Recipe
  */
  exports.exploreRecipe = async(req, res) => {
-
     try {
-
         let recipeId = req.params.id;
         const recipe = await Recipe.findById(recipeId)
 
@@ -83,9 +74,7 @@ exports.homepage = async(req, res) => {
  * Recipe
  */
 exports.searchRecipe = async(req, res) => {
-
     try {
-
         let searchTerm = req.body.searchTerm;
         let recipe = await Recipe.find( { $text: { $search: searchTerm, $diacriticSensitive: true } });
 
@@ -100,9 +89,7 @@ exports.searchRecipe = async(req, res) => {
  * Explore Latest
  */
  exports.exploreLatest = async(req, res) => {
-
     try {
-
         const limitNumber = 20;
         const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
 
@@ -117,8 +104,7 @@ exports.searchRecipe = async(req, res) => {
  * Explore Random
  */
  exports.exploreRandom = async(req, res) => {
-    try {
-        
+    try {     
         let count = await Recipe.find().countDocuments();
         let random = Math.floor(Math.random() * count);
         let recipe = await Recipe.findOne().skip(random).exec();
@@ -133,13 +119,12 @@ exports.searchRecipe = async(req, res) => {
  * GET /submit-recipe
  * Submit Recipe
  */
- exports.submitRecipe = async(req, res) => {
+exports.submitRecipe = async(req, res) => {
     const infoErrorsObj = req.flash('infoErrors');
     const infoSubmitObj = req.flash('infoSubmit');
 
     res.render('submit-recipe', { title: 'Cooking Blog - Submit Recipe', infoErrorsObj, infoSubmitObj } );
-
- }
+}
 
  /**
  * POST /submit-recipe
@@ -187,9 +172,24 @@ exports.submitRecipeOnPost = async(req, res) => {
     }
 }
 
+ /**
+ * updateOne 
+ * Recipe
+ */
+async function updateRecipe(){
+    try {
+        const res = await Recipe.updateOne({ name: 'New Recipe With Image' }, { name: 'New Recipe With Image Updated' });
+        res.n;
+        res.nModified;
+    }   catch (error) {
+        console.log(error);
+    }
+}
+// updateRecipe();
 
 
 
+// --------------------------------------------------------------------------------------------------------------------------
 
 
 
