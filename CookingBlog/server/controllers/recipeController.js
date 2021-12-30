@@ -173,8 +173,7 @@ exports.submitRecipeOnPost = async(req, res) => {
 }
 
  /**
- * updateOne 
- * Recipe
+ * update recipe 
  */
 async function updateRecipe(){
     try {
@@ -186,6 +185,18 @@ async function updateRecipe(){
     }
 }
 // updateRecipe();
+
+ /**
+ * delete recipe 
+ */
+  async function deleteRecipe(){
+    try {
+        await Recipe.deleteOne({ name: 'New Recipe With Image' });
+    }   catch (error) {
+        console.log(error);
+    }
+}
+// deleteRecipe();
 
 
 
