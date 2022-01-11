@@ -1,10 +1,10 @@
-### RecipeBlog-MongoDB-Node.js
 ## Build a Recipe Blog using Node.js and MongoDB (Express, EJS, Mongoose & more...) CRUD
+
 🚀 from : https://www.youtube.com/watch?v=OEdPH4fV7vY
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## set environment
+### set environment
 
 ```bash
 npm init -y 
