@@ -17,3 +17,9 @@ npm i connect-flash cookie-parser dotenv ejs express express-ejs-layouts express
 ```bash
 npm i nodemon --save-dev 
 ```
+
+### run
+
+```bash
+npm start 
+```
