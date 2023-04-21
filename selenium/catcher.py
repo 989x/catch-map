@@ -38,6 +38,36 @@ for i, result in enumerate(search_results[:5]):
 
 print(results_json)
 
+
+
+# _________________________ doing find nearby places from location_name _________________________
+
+# encountered many problems Sometimes the code works. Sometimes it doesn't work
+
+# Wait for the category buttons to load and click on "Restaurant"
+category_btns = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='Nv2PK THOPZb CpccDe ']")))
+category_btns.click()
+
+category_btn2 = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='g88MCb S9kvJb ']")))
+category_btn2.click()
+
+# Wait for the search box to load and fill it in with "New York City"
+search_box = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input.tactile-searchbox-input")))
+
+# sometimes works Sometimes it doesn't work
+search_box.send_keys(location_name)
+
+# button_search = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='mL3xi']")))
+# button_search.click()
+
+# code don't working
+# Press Enter to submit the search query
+# search_box.send_keys(Keys.ENTER)
+
+# _________________________ doing find nearby places from location_name _________________________
+
+
+
 with open('drop.json', 'w', encoding='utf-8') as f:
     # json.dump({"name": location_name}, f, ensure_ascii=False)
     # json.dump(results_json, f, ensure_ascii=False) 
